@@ -8,31 +8,18 @@ typedef struct{
 }sparse;
 void readSparse(sparse a[])
 {
-    int i,j,k=1,m,n,element;
+    int i,j,k=1,row,element;
     printf("Matrix - %d\n",count);
     count++;
-    printf("Enter the number of rows: ");
-    scanf("%d",&m);
-    printf("Enter the number of columns: ");
-    scanf("%d",&n);
-    a[0].row=m;
-    a[0].col=n;
-    printf("Enter matrix elements\n");
-    for(i=0;i<m;i++)
+    printf("Enter number of rows: ");
+    scanf("%d",&row);
+    printf("Enter matrix representation\n");
+    for(i=0;i<row;i++)
     {
-        for(j=0;j<n;j++)
-        {
-            scanf("%d",&element);
-            if(element!=0)
-            {
-                a[k].row=i;
-                a[k].col=j;
-                a[k].val=element;
-                k++;
-            }
-        }
+        scanf("%d",&a[i].row);
+        scanf("%d",&a[i].col);
+        scanf("%d",&a[i].val);
     }
-    a[0].val=k-1;
 }
 void sparseAdd(sparse a[],sparse b[],sparse sum[])
 {
@@ -44,29 +31,23 @@ void sparseAdd(sparse a[],sparse b[],sparse sum[])
     }
     sum[0].row=a[0].row;
     sum[0].col=a[0].col;
-    void addA()
-    {
-        sum[l].row=a[i].row;
-        sum[l].col=a[i].col;
-        sum[l].val=a[i].val;
-        i++;
-        l++;
-    }
-    void addB()
-    {
-        sum[l].row=b[j].row;
-        sum[l].col=b[j].col;
-        sum[l].val=b[j].val;
-        j++;
-        l++;
-    }
     while(i<=a[0].val && j<=b[0].val)
     {
-        if(a[i].row < b[j].row || (a[i].row == b[j].row && a[i].col < b[j].col)){
-            addA();
+        if(a[i].row < b[j].row || (a[i].row == b[j].row && a[i].col < b[j].col))
+        {
+            sum[l].row=a[i].row;
+            sum[l].col=a[i].col;
+            sum[l].val=a[i].val;
+            i++;
+            l++;
         }
-        else if(a[i].row > b[j].row || (a[i].row == b[j].row && a[i].col > b[j].col)){
-            addB();
+        else if(a[i].row > b[j].row || (a[i].row == b[j].row && a[i].col > b[j].col))
+        {
+            sum[l].row=b[j].row;
+            sum[l].col=b[j].col;
+            sum[l].val=b[j].val;
+            j++;
+            l++;
         }
         else if(a[i].row==b[j].row && a[i].col==b[j].col)
         {
@@ -80,11 +61,19 @@ void sparseAdd(sparse a[],sparse b[],sparse sum[])
     }
     while(i<=a[0].val)
     {
-        addA();
+        sum[l].row=a[i].row;
+        sum[l].col=a[i].col;
+        sum[l].val=a[i].val;
+        i++;
+        l++;
     }
     while(j<=b[0].val)
     {
-        addB();
+        sum[l].row=b[j].row;
+        sum[l].col=b[j].col;
+        sum[l].val=b[j].val;
+        j++;
+        l++;
     }
     sum[0].val=l-1;
     
