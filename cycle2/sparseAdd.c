@@ -8,18 +8,31 @@ typedef struct{
 }sparse;
 void readSparse(sparse a[])
 {
-    int i,j,k=1,row,element;
+    int i,j,k=1,m,n,element;
     printf("Matrix - %d\n",count);
     count++;
-    printf("Enter number of rows: ");
-    scanf("%d",&row);
-    printf("Enter matrix representation\n");
-    for(i=0;i<row;i++)
+    printf("Enter the number of rows: ");
+    scanf("%d",&m);
+    printf("Enter the number of columns: ");
+    scanf("%d",&n);
+    a[0].row=m;
+    a[0].col=n;
+    printf("Enter matrix elements\n");
+    for(i=0;i<m;i++)
     {
-        scanf("%d",&a[i].row);
-        scanf("%d",&a[i].col);
-        scanf("%d",&a[i].val);
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&element);
+            if(element!=0)
+            {
+                a[k].row=i;
+                a[k].col=j;
+                a[k].val=element;
+                k++;
+            }
+        }
     }
+    a[0].val=k-1;
 }
 void sparseAdd(sparse a[],sparse b[],sparse sum[])
 {
