@@ -16,6 +16,7 @@ void printSparse(sparse a[])
 int main()
 {
     int i,j,m,n,k=1,element;
+    float sparsity;
     sparse a[100];
     system("clear");
     printf("Enter the number of rows: ");
@@ -40,5 +41,7 @@ int main()
         }
     }
     a[0].val=k-1;
+    sparsity = (float) (m*n+1-k)/(m*n);
     printSparse(a);
+    printf("\nsparsity = %f",sparsity);
 }
